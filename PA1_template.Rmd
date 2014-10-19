@@ -1,25 +1,83 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+title: "PA1_template.Rmd"
+author: "Richard Ebling"
+date: "10/19/2014"
+output: html_document
 ---
+### Loading and preprocessing data:  
+*Load libraries then data (cache data)*   
+```{r "loadlibs"} 
+library(dplyr) 
+library(knitr) 
+```
 
+```{r "unzip_load_data", cache=TRUE}
+unzip("../repdata-data-activity.zip", exdir="../uz")
+acdat <- tbl_df(read.csv("../uz/activity.csv", stringsAsFactors=FALSE))
+```
+*Rename vars to reduce confusion w/ function names*  
+```{r "renameAndGroup"}
+names(acdat) <- c("Steps", "Date", "Interval")
+ac_by_date  <- group_by(acdat, Date)
+```
+### Mean total # of steps taken per day:  
+*Calculate Total steps per day (Tsteps), mean (TSmean) and median (TSmedian), display histogram and (inline) mean and median:*  
+```{r "sumstepshist"}
+nsteps <- summarise(ac_by_date, Tsteps = sum(Steps))
+TSmean <- mean(nsteps$Tsteps, na.rm=TRUE)  
+TSmedian <- median(nsteps$Tsteps, na.rm=TRUE)  
+hist(nsteps$Tsteps, breaks=12, xlab="# of steps per day", main="Histogram of steps per day")
+```
+  
+Mean total number of steps per day = `r TSmean`    
+Median total number of steps per day = `r TSmedian`  
 
-## Loading and preprocessing the data
+### Average Daily Activity pattern:  
 
+*Create and display time series plot of 5-min intervals vs avg# of steps per interval, averaged across all days; display interval with maximum avergae # of steps:*  
+```{r "tsplot"}
+ac_by_int  <- group_by(acdat, Interval)
+Ints <- summarise(ac_by_int, avsteps=mean(Steps, na.rm=TRUE))
+plot(Ints, type="l", main="Average Daily Activity Pattern", ylab="Average steps per 5 minutes")
+maxInt <- max(Ints$avsteps)
+MaxIntervalID <- Ints[grep(maxInt,Ints$avsteps),1]
+```
+The interval ID "`r MaxIntervalID`" contains the maximum number of steps (`r maxInt`).  
+  
+#### Imputing missing values
+Calculate & report total number of missing values in the dataset:
+```{r countNAs}
+totalNAs <- sum(is.na(acdat$Steps))
+```
+Total number of rows with missing values = `r totalNAs`  
 
+*Check for obvious patterns in missing values: (not in instructions)*  
+```{r sanitycheck}
+unique(acdat$Date[is.na(acdat$Steps)])
+weekdays(as.Date(unique(acdat$Date[is.na(acdat$Steps)])))
+```  
+*Conclusion: no obvious patterns found. Of 8 dates with missing values, all weekdays are represented except Tuesday; no weekday is present more than twice.  
+All values for Sunday 2012-11-04 are missing, thus eliminating a potential confound, and allowing data to be treated as if from a non-DST-observing location.*  
+* split dataset into lines with/without NA, replace NA (steps) with avg steps for that interval, recombine datasets, arrange in orig order*:  
+```{r imputevalues}
+norm_acdat <- acdat[!is.na(acdat$Steps),]
+NA_acdat <- acdat[is.na(acdat$Steps),]
+replaceNAs <- select(inner_join(Ints, NA_acdat), avsteps, Date, Interval)
+names(replaceNAs) <- c("Steps", "Date", "Interval")
+newset <- arrange(rbind(norm_acdat,replaceNAs), Date, Interval)
+```
+*apply analysis code to new dataset*  
 
-## What is mean total number of steps taken per day?
+*Calculate Total steps per day (Tsteps), mean (TSmean) and median (TSmedian), display histogram and (inline) mean and median:*  
+```{r "sumstepshist2"}
+new_by_date  <- group_by(newset, Date)
+newsteps <- summarise(new_by_date, TNsteps = sum(Steps))
+TNmean <- mean(newsteps$TNsteps, na.rm=TRUE)  
+TNmedian <- median(newsteps$TNsteps, na.rm=TRUE)  
+hist(newsteps$TNsteps, breaks=12, xlab="# of steps per day", main="Histogram of steps per day (imputed)")
+```
+  
+Mean total number of steps per day (imputed)= `r TNmean`    
+Median total number of steps per day = `r TNmedian`  
 
-
-
-## What is the average daily activity pattern?
-
-
-
-## Imputing missing values
-
-
-
-## Are there differences in activity patterns between weekdays and weekends?
+* These values do not look different from others because the imputed values were the means of the previous values, and changed minimally. The impact of imputing missing data (by this method) was minimal.
