@@ -1,48 +1,22 @@
-## Introduction
+*FYI: if you're grading this in October 2014, you might want to check the Discussion Forum 
+about the status of this submission--whether to apply any points or not*
 
-It is now possible to collect a large amount of data about personal
-movement using activity monitoring devices such as a
-[Fitbit](http://www.fitbit.com), [Nike
-Fuelband](http://www.nike.com/us/en_us/c/nikeplus-fuelband), or
-[Jawbone Up](https://jawbone.com/up). These type of devices are part of
-the "quantified self" movement -- a group of enthusiasts who take
-measurements about themselves regularly to improve their health, to
-find patterns in their behavior, or because they are tech geeks. But
-these data remain under-utilized both because the raw data are hard to
-obtain and there is a lack of statistical methods and software for
-processing and interpreting the data.
+Explanation: As usual, I was working up to the last minute to get the code written and then 
+push to GitHub and log it on the submission page--so although my last code files were saved 
+(locally) at "T minus 5 minutes" (5:25 pm MST), my updates to the project submission 
+page (URL, SHA1-hash, completion of signature track verification) happened a few minutes later[1]  
 
-This assignment makes use of data from a personal activity monitoring
-device. This device collects data at 5 minute intervals through out the
-day. The data consists of two months of data from an anonymous
-individual collected during the months of October and November, 2012
-and include the number of steps taken in 5 minute intervals each day.
+ So the validity of my submission for this assignment is in doubt, and I haven't re-read 
+discussions about this issue in the forums lately. Since the assignment grade will be 
+based on the median of grader's responses, I'm happy to take whatever comes. If you feel 
+it's best to give zero on all, that's okay, I can try again next month. I know
+ I'll be missing at least a few points for not completing the weekdays-time series plot. 
+ 
+[1] the submission page still said "Submitted. You can still make changes and re-submit 
+before the deadline."  However it was **still** showing that announcement, 40 minutes 
+later; (presumably will change when peer grading begins).  
 
-## Data
-
-The data for this assignment can be downloaded from the course web
-site:
-
-* Dataset: [Activity monitoring data](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip) [52K]
-
-The variables included in this dataset are:
-
-* **steps**: Number of steps taking in a 5-minute interval (missing
-    values are coded as `NA`)
-
-* **date**: The date on which the measurement was taken in YYYY-MM-DD
-    format
-
-* **interval**: Identifier for the 5-minute interval in which
-    measurement was taken
-
-
-
-
-The dataset is stored in a comma-separated-value (CSV) file and there
-are a total of 17,568 observations in this
-dataset.
-
+*(Roger Peng's introduction deleted; since no one will be grading from this page, it shouldn't matter) *  
 
 ## Assignment
 
