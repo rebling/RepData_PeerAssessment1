@@ -4,7 +4,7 @@ author: "Richard Ebling"
 date: "10/19/2014"
 output: html_document
 ---
-### Loading and preprocessing data:  
+### Loading and preprocessing data: 
 *Load libraries then data (cache data)*   
 ```{r "loadlibs"} 
 library(dplyr) 
