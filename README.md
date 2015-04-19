@@ -1,23 +1,3 @@
-*FYI: if you're grading this in October 2014, you might want to check the Discussion Forum 
-about the status of this submission--whether to apply any points or not*
-
-Explanation: As usual, I was working up to the last minute to get the code written and then 
-push to GitHub and log it on the submission page--so although my last code files were saved 
-(locally) at "T minus 5 minutes" (5:25 pm MST), my updates to the project submission 
-page (URL, SHA1-hash, completion of signature track verification) happened a few minutes later[1]  
-
- So the validity of my submission for this assignment is in doubt, and I haven't re-read 
-discussions about this issue in the forums lately. Since the assignment grade will be 
-based on the median of grader's responses, I'm happy to take whatever comes. If you feel 
-it's best to give zero on all, that's okay, I can try again next month. I know
- I'll be missing at least a few points for not completing the weekdays-time series plot. 
- 
-[1] the submission page still said "Submitted. You can still make changes and re-submit 
-before the deadline."  However it was **still** showing that announcement, 40 minutes 
-later; (presumably will change when peer grading begins).  
-
-*(Roger Peng's introduction deleted; since no one will be grading from this page, it shouldn't matter) *  
-
 ## Assignment
 
 This assignment will be described in multiple parts. You will need to
